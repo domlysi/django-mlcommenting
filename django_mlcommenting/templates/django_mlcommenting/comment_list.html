@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="mlc-comment-list-wrapper"
+     data-url="{% url 'django_mlcommenting:detail-ajax' %}"
+     data-preview-url="{% url 'django_mlcommenting:preview' %}"
+     data-show-value="{{ comments_show }}">
+    {% for comment in comment_list %}
+        {% if no_afterload %}
+            {% include 'django_mlcommenting/comment_detail.html' %}
+            {% if request.user == comment.user %}
+                {% include 'django_mlcommenting/comment_own_post_small.html' with comment=comment %}
+            {% endif %}
+        {% else %}
+            <div class="mlc-comment-element-ajax-wrapper" data-commentid="{{ comment.id }}"></div>
+        {% endif %}
+        {% if forloop.last %}
+            {% if comments_count > comments_show or show_more %}
+                <a class="mlc mlc-comments-list-more"
+                   href="{% url 'django_mlcommenting:load-more' %}
+?ctypeapplabel={{ comment.get_content_type_app_label }}
+&ctypemodel={{ comment.get_content_type_model }}
+&oid={{ comment.object_id }}">
+                    {% trans 'load more' %}
+                </a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

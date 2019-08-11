@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="mlc-own-post-wrapper" style="margin-top: -15px; margin-bottom: 25px;" data-csrf="{{ csrf_token }}"
+     data-url-delete="{% url 'django_mlcommenting:delete' comment.id %}"
+     data-url-edit="{% url 'django_mlcommenting:edit' comment.id %}">
+    <div class="mlc-show-own-post">
+        <div class="mlc mlc-title">
+            {% blocktrans with comment.updated_at|timesince as time %}Your comment written
+                <b>{{ time }} ago</b>{% endblocktrans %}
+            <div class="mlc-show-own-post-toolbar">
+                <div class="material-icons mlc-edit-post"
+                     title="Edit">create
+                </div>
+                <div class="material-icons mlc-delete-post"
+                     title="Delete">delete
+                </div>
+            </div>
+        </div>
+        {% if new_comment %}
+            {% include 'django_mlcommenting/comment_detail.html' with comment=comment hide_more_options=true %}
+        {% endif %}
+    </div>
+</div>

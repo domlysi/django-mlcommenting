@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="mlc-own-post-wrapper" data-csrf="{{ csrf_token }}"
+     data-url="{% url 'django_mlcommenting:delete' comment.id %}">
+    <div class="mlc-show-own-post">
+        <div class="mlc mlc-title">
+            {% blocktrans with comment.updated_at|timesince as time %}Your comment written
+                <b>{{ time }} ago</b>{% endblocktrans %}
+            <div class="mlc-show-own-post-toolbar">
+                <div class="material-icons mlc-delete-post"
+                     title="Delete">delete
+                </div>
+            </div>
+        </div>
+        {% include 'django_mlcommenting/comment_detail.html' with comment=comment hide_more_options=true %}
+    </div>
+</div>

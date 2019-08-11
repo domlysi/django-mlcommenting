@@ -1,0 +1,65 @@
+{% load mlc %}
+{% load i18n %}
+{% if not has_posted %}
+    {% if request.user|comment_form_toggle %}
+        <div class="mlc">
+            <hr>
+            <div style="font-size: 18px; margin: 15px auto">
+                {% blocktrans %}Leave your opinion as{% endblocktrans %}  <span
+                    style="font-weight: bold;">{{ request.user.username|default:"Anonymous" }}</span>
+            </div>
+        </div>
+        <div id="mlc-comment-success" class="mlc"></div>
+
+        <div class="mlc-form-wrapper mlc">
+            <div class="mlc-form-wrapper-left">
+                <div class="mlc-comment-user-image">
+                    {% if request.user|user_image %}
+                        <img class="" src="{{ request.user|user_image }}" width="50" height="50" alt="User Image">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mlc-form-wrapper-right">
+                <form id="mlc-comment-form" method="post" action="{% url 'django_mlcommenting:post' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="r" value="{{ request.path }}">
+
+                    {% for field in form %}
+                        {% if field.is_hidden %}
+                            <div>{{ field }}</div>
+                        {% else %}
+                            {% if field.errors %}{{ field.errors }}{% endif %}
+
+                            {% ifequal field.name "rating" %}
+
+                                <div class="mlc-rating-wrapper">
+                                    <fieldset>
+                                        <div class="star-cb-group">
+                                            {% for radio in field %}
+                                                {% if radio %}
+                                                    <input type="radio" id="{{ radio.data.attrs.id }}"
+                                                           name="{{ radio.data.name }}" value="{{ radio.data.value }}"/>
+                                                    <label for="{{ radio.data.attrs.id }}"></label>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                            {% else %}
+                                <div {% if field.errors %} class="error"{% endif %}>
+                                    {{ field }}
+                                </div>
+                            {% endifequal %}
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="mlc mlc-btn" disabled>{% trans 'Submit' %}</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        {% include 'django_mlcommenting/msgs/comment_need_login.html' %}
+    {% endif %}
+{% elif has_posted_visible %}
+    {% include 'django_mlcommenting/comment_own_post_small.html' with comment=has_posted new_comment=1 %}
+{% endif %}

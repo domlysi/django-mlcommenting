@@ -1,0 +1,66 @@
+{% load i18n %}
+
+{% if comment_list|length %}
+    <div class="mlc mlc-comment-stats">
+        <div class="mlc-comment-stats-scoreboard">
+            <div class="mlc-comment-stats-rating-score">{{ comment_list_score.rating__avg|floatformat:"1" }}</div>
+            <div>
+                <div class="mlc-comment-rating-star"></div>
+                <div class="mlc-comment-rating-star"></div>
+                <div class="mlc-comment-rating-star"></div>
+                <div class="mlc-comment-rating-star"></div>
+                <div class="mlc-comment-rating-star"></div>
+            </div>
+            <div>{{ comment_list|length }} {% trans 'total' %}</div>
+        </div>
+        <div style="flex-grow: 1">
+            <div class="mlc-comment-stats-rating-wrapper">
+                <div>{% include 'django_mlcommenting/comment_rating_element_active.html' %} 5</div>
+                <div class="mlc-comment-stats-element" style="position: relative">
+                    <div class="mlc-comment-stats-element-bar mlc-stats-green"
+                         style="width: {{ comment_list_score_ratings.5.width }}%;"></div>
+                    {{ comment_list_score_ratings.5.value }}
+                </div>
+            </div>
+
+            <div class="mlc-comment-stats-rating-wrapper">
+                <div>{% include 'django_mlcommenting/comment_rating_element_active.html' %} 4</div>
+                <div class="mlc-comment-stats-element" style="position: relative">
+                    <div class="mlc-comment-stats-element-bar mlc-stats-lightgreen"
+                         style="width: {{ comment_list_score_ratings.4.width }}%;"></div>
+                    {{ comment_list_score_ratings.4.value }}
+                </div>
+            </div>
+
+            <div class="mlc-comment-stats-rating-wrapper">
+                <div>{% include 'django_mlcommenting/comment_rating_element_active.html' %} 3</div>
+                <div class="mlc-comment-stats-element" style="position: relative">
+                    <div class="mlc-comment-stats-element-bar mlc-stats-yellow"
+                         style="width: {{ comment_list_score_ratings.3.width }}%;"></div>
+                    {{ comment_list_score_ratings.3.value }}
+                </div>
+            </div>
+
+            <div class="mlc-comment-stats-rating-wrapper">
+                <div>{% include 'django_mlcommenting/comment_rating_element_active.html' %} 2</div>
+                <div class="mlc-comment-stats-element" style="position: relative">
+                    <div class="mlc-comment-stats-element-bar mlc-stats-orange"
+                         style="width: {{ comment_list_score_ratings.2.width }}%;"></div>
+                    {{ comment_list_score_ratings.2.value }}
+                </div>
+            </div>
+
+            <div class="mlc-comment-stats-rating-wrapper">
+                <div>{% include 'django_mlcommenting/comment_rating_element_active.html' %} 1</div>
+                <div class="mlc-comment-stats-element" style="position: relative">
+                    <div class="mlc-comment-stats-element-bar mlc-stats-red"
+                         style="width: {{ comment_list_score_ratings.1.width }}%;"></div>
+                    {{ comment_list_score_ratings.1.value }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% else %}
+    {#  no comments #}
+{% endif %}

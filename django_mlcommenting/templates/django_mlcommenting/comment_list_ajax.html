@@ -1,0 +1,13 @@
+{% for comment in comment_list %}
+    {% include 'django_mlcommenting/comment_detail.html' %}
+    <div class="mlc-comment-element-ajax-wrapper" data-commentid="{{ comment.id }}"></div>
+    {% if forloop.last and show_more %}
+        <a class="mlc mlc-comments-list-more"
+           href="{% url 'django_mlcommenting:load-more' %}
+?ctypeapplabel={{ comment.get_content_type_app_label }}
+&ctypemodel={{ comment.get_content_type_model }}
+&oid={{ comment.object_id }}">
+            load more
+        </a>
+    {% endif %}
+{% endfor %}

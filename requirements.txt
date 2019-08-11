@@ -1,0 +1,3 @@
+Django
+setuptools
+pygeoip==0.3.2
