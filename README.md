@@ -1,6 +1,4 @@
-=============================
-Multi-Language-Commenting
-=============================
+# Multi-Language-Commenting
 
 A commenting system for a multi language purpose. It takes use of the Google Services to detect and translate comments.
 
@@ -9,33 +7,30 @@ Quickstart
 
 Add it to your `INSTALLED_APPS`:
 
-.. code-block:: python
-
-    INSTALLED_APPS = (
-        ...
-        'django_mlcommenting.apps.DjangoMlcommentingConfig',
-        ...
-    )
+```python
+INSTALLED_APPS = (
+    'django_mlcommenting',
+)
+```
 
 Add Multi-Language-Commenting 's URL patterns:
 
 .. code-block:: python
+```python
+from django_mlcommenting import urls as django_mlcommenting_urls
+from django.conf.urls import url, include
 
-    from django_mlcommenting import urls as django_mlcommenting_urls
 
+urlpatterns = [
+    url(r'^', include(django_mlcommenting_urls)),
+]
+```
 
-    urlpatterns = [
-        ...
-        url(r'^', include(django_mlcommenting_urls)),
-        ...
-    ]
-
-.
-
-Additional Resources
+Requirements
 ---------------------
 
-.. code-block:: html
+```djangotemplate
+    {% load staticfiles %}
 
     <!-- main css -->
     <link rel="stylesheet" type="text/css" href="
@@ -53,14 +48,13 @@ Additional Resources
 
     <!-- Body bottom -->
     <script src="{% static 'django_mlcommenting/js/django_mlcommenting.js' %}"></script>
+```
 
-Credits
--------
 
-Tools used in rendering this package:
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-*  Cookiecutter_
-*  `cookiecutter-djangopackage`_
+Please make sure to update tests as appropriate
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
