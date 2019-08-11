@@ -1,10 +1,14 @@
 # Multi-Language-Commenting
-[![Build Status](https://travis-ci.org/domlysi/django-mlcommenting.svg?branch=master)](https://travis-ci.org/domlysi/django-mlcommenting)
 
 A commenting system for a multi language purpose. It takes use of the Google Services to detect and translate comments.
 
 Quickstart
 ----------
+Install with
+```bash
+pip install django-mlcommeting
+```
+
 
 Add it to your `INSTALLED_APPS`:
 

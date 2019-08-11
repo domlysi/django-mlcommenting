@@ -13,12 +13,12 @@ from io import open
 from os import path
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 # Arguments marked as "Required" below must be included for upload to PyPI.
@@ -30,6 +30,7 @@ setup(
 
     description='Django commenting and object rating module with buildin google translation',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/domlysi/django-mlcommenting',  # Optional
     author='Dominik Lysiak',
     author_email='dominik.lysiak@freenet.de',
@@ -64,6 +65,6 @@ setup(
     ],
 
     keywords='python django django-module',
-    packages=find_packages(['django-mlcommenting']),
+    packages=['django_mlcommenting', ],
     python_requires='!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4',
 )

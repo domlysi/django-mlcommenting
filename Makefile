@@ -30,6 +30,7 @@ clean-pyc: ## remove Python file artifacts
 release: clean ## package and upload a release
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
+	twine upload dist/*
 
 sdist: clean ## package
 	python setup.py sdist
