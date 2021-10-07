@@ -42,7 +42,10 @@ def user_image(user):
         return None
 
     model = apps.get_model(app_label=user_image_app_label, model_name=user_image_model)
-    obj_model = model.objects.get(user=user)
+    try:
+        obj_model = model.objects.get(user=user)
+    except model.DoesNotExist:
+        return None
     obj_image_field = getattr(obj_model, user_image_field, None)
 
     if not obj_image_field:
