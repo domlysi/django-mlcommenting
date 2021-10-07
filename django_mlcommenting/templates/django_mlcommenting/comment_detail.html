@@ -1,0 +1,74 @@
+{% load mlc %}
+{% load staticfiles %}
+{% load i18n %}
+{% if comment_message %}
+    <div class="mlc mlc-message {{ comment_message.type }}">
+        {{ comment_message.value }}
+    </div>
+{% endif %}
+
+<div class="mlc mlc-comment-wrapper">
+    <div class="mlc-element-div-left">
+        <div class="mlc-comment-user-image">
+            {% if comment.user|user_image %}
+                <img src="{{ comment.user|user_image }}" width="50" height="50" alt="User Image">
+            {% endif %}
+        </div>
+    </div>
+    <div class="mlc-comment-div-right">
+        <div class="mlc-toolbar">
+            {% if request.user != comment.user and not request.user.is_anonymous %}
+                <div class="mlc-comment-like{% if comment|comment_like:request.user %} active{% endif %}"
+                     data-id="{{ comment.id }}" data-url="{% url 'django_mlcommenting:like' %}"
+                     data-csrf="{{ csrf_token }}">
+                    {{ comment_liked }}
+                    <div><i class="material-icons">thumb_up</i></div>
+                    <span class="mlc-comment-like-count">{{ comment|comment_likes_count }}</span>
+                </div>
+            {% endif %}
+            {% if hide_more_options %}
+                <div>
+                    <i class="material-icons">more_vert</i>
+                </div>
+            {% endif %}
+        </div>
+        <div class="mlc-comment-title">
+      <span class="mlc-comment-user-name">
+        {% if comment.user %}
+            {{ comment.user }}
+        {% else %}
+            Anonymous
+        {% endif %}
+      </span>
+            <div class="">
+        <span role="img">
+          {{ comment.rating_html|safe }}
+        </span>
+                <span class="mlc-comment-date">{{ comment.created_at|date:"d. M Y" }}
+                    {% if comment.created_at != comment.updated_at %} - {% trans 'Edited' %}{% endif %}</span>
+            </div>
+        </div>
+        <div class="mlc-comment-text--wrapper">
+            {% with comment.text|google_translate:request as trans_text %}
+                {% if trans_text %}
+                    <small style="color: #aaaaaa">Translated into {{ trans_text.dest }}</small>
+                    <div>{{ trans_text.text }}</div>
+                    <div class="mlc-translate-origin">
+                        <a href="javascript:void(0);"
+                           class="mlc-comment-translate-show-more">{% trans 'Show original' %}
+                            ({{ trans_text.extra_data.language|first|first }})</a>
+                        <div class="mlc-comment-translate-original">
+                            <span class="mlc-comment-translate-show-more-preview">{{ comment.text|truncatewords:"5" }}</span>
+                            <span class="mlc-comment-text--string mlc-comment-translate-show-more-content">{{ comment.text }}</span>
+                        </div>
+                    </div>
+                {% else %}
+                    <span class="mlc-comment-text--string">{{ comment.text }}</span>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% if request.user == comment.user %}
+    {% include 'django_mlcommenting/comment_own_post_small.html' with comment=comment %}
+{% endif %}

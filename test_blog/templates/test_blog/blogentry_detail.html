@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load mlc %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'django_mlcommenting/css/django_mlcommenting.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+  <script src="{% static 'django_mlcommenting/js/django_mlcommenting.js' %}"></script>
+</head>
+<body>
+<h1>{{ object.title }}</h1>
+<p>
+  {{ object.content }}
+</p>
+
+<div class="mlc-comment-list">
+  {% render_comment_stats for object %}
+  {% render_comment_list for object %}
+  {% render_comment_form for object %}
+</div>
+</body>
+</html>

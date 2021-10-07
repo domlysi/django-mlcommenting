@@ -1,0 +1,88 @@
+Metadata-Version: 2.1
+Name: django-mlcommenting
+Version: 0.1.1
+Summary: Django commenting and object rating module with buildin google translation
+Home-page: https://github.com/domlysi/django-mlcommenting
+Author: Dominik Lysiak
+Author-email: dominik.lysiak@freenet.de
+License: UNKNOWN
+Description: # Multi-Language-Commenting
+        
+        A commenting system for a multi language purpose. It takes use of the Google Services to detect and translate comments.
+        
+        Quickstart
+        ----------
+        Install with
+        ```bash
+        pip install django-mlcommeting
+        ```
+        
+        
+        Add it to your `INSTALLED_APPS`:
+        
+        ```python
+        INSTALLED_APPS = (
+            'django_mlcommenting',
+        )
+        ```
+        
+        Add Multi-Language-Commenting 's URL patterns:
+        
+        .. code-block:: python
+        ```python
+        from django_mlcommenting import urls as django_mlcommenting_urls
+        from django.conf.urls import url, include
+        
+        
+        urlpatterns = [
+            url(r'^', include(django_mlcommenting_urls)),
+        ]
+        ```
+        
+        Requirements
+        ---------------------
+        
+        ```djangotemplate
+            {% load staticfiles %}
+        
+            <!-- main css -->
+            <link rel="stylesheet" type="text/css" href="
+                {% static 'django_mlcommenting/css/django_mlcommenting.css' %}
+            ">
+        
+            <!-- Material Icons -->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+        
+            <!-- JQuery -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        
+            <!-- Body bottom -->
+            <script src="{% static 'django_mlcommenting/js/django_mlcommenting.js' %}"></script>
+        ```
+        
+        
+        ## Contributing
+        Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+        
+        Please make sure to update tests as appropriate
+        
+        ## License
+        [MIT](https://choosealicense.com/licenses/mit/)
+Keywords: python django django-module
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Framework :: Django :: 2.0
+Classifier: Framework :: Django :: 2.1
+Classifier: Framework :: Django :: 2.2
+Requires-Python: !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4
+Description-Content-Type: text/markdown

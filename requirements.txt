@@ -1,0 +1,5 @@
+Django~=3.2.8
+setuptools~=57.0.0
+pygeoip==0.3.2
+django-ipware==2.1.0
+py-translate
